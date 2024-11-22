@@ -61,6 +61,7 @@ class AntColonyOptimizer:
         print(
             f"Текущая лучшая длина {self.best_cost}"
         )  # Выводим текущую лучшую стоимость
+        print(f"Текущий лучший путь {self.best_path}")
 
     def update_pheromone(self, ant):
         """
@@ -119,8 +120,8 @@ class AntColonyOptimizer:
         pos = nx.spring_layout(G)
 
         # Рисуем узлы
-        nx.draw_networkx_nodes(G, pos, ax=ax, node_size=500, node_color="lightblue")
-        nx.draw_networkx_labels(G, pos, ax=ax, font_size=10, font_color="black")
+        nx.draw_networkx_nodes(G, pos, ax=ax, node_size=100, node_color="lightblue")
+        nx.draw_networkx_labels(G, pos, ax=ax, font_size=8, font_color="black")
 
         # Рисуем рёбра, толщину и цвет которых определяет уровень феромонов
         edges = G.edges(data=True)

@@ -2,7 +2,7 @@ from src.graph import Graph
 from src.antAlg import AntColonyOptimizer
 
 
-file = open('graph.txt')
+file = open("1000.txt")
 # Создаем граф
 graph = Graph()
 
@@ -19,5 +19,4 @@ iterations = 20
 
 # Создаем оптимизатор и запускаем анимацию
 aco = AntColonyOptimizer(graph, num_ants, alpha, beta, evaporation_rate, iterations)
-aco.run_animation("a", "c")
-
+aco.run_animation("0", "999")

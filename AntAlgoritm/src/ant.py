@@ -1,5 +1,6 @@
 import random
 
+
 class Ant:
     def __init__(self, start_node):
         """
@@ -32,15 +33,29 @@ class Ant:
         # Получаем список соседей текущего узла (в формате [(сосед, вес), ...])
         neighbors = graph.get_neighbors(current_node)
 
+        # Фильтруем соседей, которые уже посещены
+
+        unvisited_neighbors = [
+            (neighbor, weight)
+            for neighbor, weight in neighbors
+            if neighbor not in self.path
+        ]
+
+        if not unvisited_neighbors:  # Если нет непосещённых соседей
+            print(f"Муравей на вершине {current_node} застрял. Перезагружаем путь...")
+            self.path = [self.start_node]  # Перезапускаем путь
+            self.total_cost = 0
+            return
+
         # Список вероятностей для каждого соседа
         probabilities = []
-        for neighbor, weight in neighbors:
+        for neighbor, weight in unvisited_neighbors:
             # Уровень феромонов на ребре (current_node, neighbor)
             pheromone = graph.pheromone.get((current_node, neighbor), 1.0)
             # Вычисляем вероятность выбора этого соседа:
             # - pheromone ** alpha: роль феромонов
             # - (1 / weight) ** beta: роль обратного расстояния (чем меньше расстояние, тем лучше)
-            probability = (pheromone ** alpha) * ((1 / weight) ** beta)
+            probability = (pheromone**alpha) * ((1 / weight) ** beta)
             probabilities.append(probability)
 
         # Нормализуем вероятности, чтобы их сумма равнялась 1
@@ -49,12 +64,12 @@ class Ant:
 
         # Случайно выбираем следующий узел с учетом нормализованных вероятностей
         next_node = random.choices(
-            [neighbor for neighbor, _ in neighbors],  # Список соседей
-            weights=probabilities  # Соответствующие вероятности
+            [neighbor for neighbor, _ in unvisited_neighbors],  # Список соседей
+            weights=probabilities,  # Соответствующие вероятности
         )[0]
 
         # Стоимость следующего узла
-        next_cost = dict(neighbors)[next_node]
+        next_cost = dict(unvisited_neighbors)[next_node]
 
         # Обновляем маршрут муравья (добавляем следующий узел)
         self.path.append(next_node)
