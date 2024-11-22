@@ -2,7 +2,7 @@ from src.graph import Graph
 from src.antAlg import AntColonyOptimizer
 
 
-file = open('./Graph_py/graph.txt')
+file = open('graph.txt')
 # Создаем граф
 graph = Graph()
 
