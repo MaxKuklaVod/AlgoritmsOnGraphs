@@ -1,0 +1,16 @@
+a b 5
+a d 100
+a e 10
+b d 80
+b c 40
+e f 3
+e g 15
+g h 6
+g j 20
+j k 9
+j i 30
+k d 20
+d j 3
+k i 15
+k l 25
+i l 3

@@ -42,10 +42,10 @@ class Ant:
         ]
 
         if not unvisited_neighbors:  # Если нет непосещённых соседей
-            print(f"Муравей на вершине {current_node} застрял. Перезагружаем путь...")
+            # print(f"Муравей на вершине {current_node} застрял. Перезагружаем путь...")
             self.path = [self.start_node]  # Перезапускаем путь
             self.total_cost = 0
-            return
+            return True
 
         # Список вероятностей для каждого соседа
         probabilities = []
