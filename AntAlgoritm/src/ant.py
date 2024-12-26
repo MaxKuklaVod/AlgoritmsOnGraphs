@@ -62,6 +62,7 @@ class Ant:
         total = sum(probabilities)
         probabilities = [p / total for p in probabilities]
 
+
         # Случайно выбираем следующий узел с учетом нормализованных вероятностей
         next_node = random.choices(
             [neighbor for neighbor, _ in unvisited_neighbors],  # Список соседей
@@ -76,3 +77,4 @@ class Ant:
 
         # Обновляем общую стоимость пути
         self.total_cost += next_cost
+        return probabilities
